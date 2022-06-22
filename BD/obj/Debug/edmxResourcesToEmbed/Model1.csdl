@@ -1,0 +1,535 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MenuRestaurantModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <ComplexType Name="asdf_Result">
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cena" Type="Int32" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="Blud_and_nap">
+    <Key>
+      <PropertyRef Name="ID_Blud_and_nap" />
+    </Key>
+    <Property Name="ID_Blud_and_nap" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Categ" Type="Int32" Nullable="false" />
+    <Property Name="Foto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cena" Type="Int32" Nullable="false" />
+    <Property Name="Block" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Categ" Relationship="Self.FK_Blud_and_nap_Categ1" FromRole="Blud_and_nap" ToRole="Categ" />
+    <NavigationProperty Name="Rezepts" Relationship="Self.FK_Rezepts_Blud_and_nap" FromRole="Blud_and_nap" ToRole="Rezepts" />
+    <NavigationProperty Name="Sost_zakaz" Relationship="Self.FK_Sost_zakaz_Blud_and_nap" FromRole="Blud_and_nap" ToRole="Sost_zakaz" />
+  </EntityType>
+  <EntityType Name="Categ">
+    <Key>
+      <PropertyRef Name="ID_Categ" />
+    </Key>
+    <Property Name="ID_Categ" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Blud_and_nap" Relationship="Self.FK_Blud_and_nap_Categ1" FromRole="Categ" ToRole="Blud_and_nap" />
+  </EntityType>
+  <EntityType Name="Ed_izm">
+    <Key>
+      <PropertyRef Name="ID_Ed_izm" />
+    </Key>
+    <Property Name="ID_Ed_izm" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Ingred" Relationship="Self.FK_Ingred_Ed_izm" FromRole="Ed_izm" ToRole="Ingred" />
+  </EntityType>
+  <EntityType Name="Ingred">
+    <Key>
+      <PropertyRef Name="ID_Ingred" />
+    </Key>
+    <Property Name="ID_Ingred" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ves" Type="Int32" Nullable="false" />
+    <Property Name="ID_Ed_izm" Type="Int32" Nullable="false" />
+    <Property Name="Pred_sroc_hran" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Ed_izm" Relationship="Self.FK_Ingred_Ed_izm" FromRole="Ingred" ToRole="Ed_izm" />
+    <NavigationProperty Name="Jurn_ychet_ingred" Relationship="Self.FK_Jurn_ychet_ingred_Ingred" FromRole="Ingred" ToRole="Jurn_ychet_ingred" />
+    <NavigationProperty Name="Sost_rez" Relationship="Self.FK_Sost_rez_Ingred" FromRole="Ingred" ToRole="Sost_rez" />
+  </EntityType>
+  <EntityType Name="Jurn_ychet_ingred">
+    <Key>
+      <PropertyRef Name="ID_Jurn_ingred" />
+    </Key>
+    <Property Name="ID_Jurn_ingred" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Ingred" Type="Int32" Nullable="false" />
+    <Property Name="ID_Type_ychet" Type="Int32" Nullable="false" />
+    <Property Name="Date_oper" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Kol" Type="Int32" Nullable="false" />
+    <Property Name="Ves" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Ingred" Relationship="Self.FK_Jurn_ychet_ingred_Ingred" FromRole="Jurn_ychet_ingred" ToRole="Ingred" />
+    <NavigationProperty Name="Type_ychet" Relationship="Self.FK_Jurn_ychet_ingred_Type_ychet" FromRole="Jurn_ychet_ingred" ToRole="Type_ychet" />
+  </EntityType>
+  <EntityType Name="Rezepts">
+    <Key>
+      <PropertyRef Name="ID_Rezept" />
+    </Key>
+    <Property Name="ID_Rezept" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Blud_and_nap" Type="Int32" Nullable="false" />
+    <Property Name="Spos_prig" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Blud_and_nap" Relationship="Self.FK_Rezepts_Blud_and_nap" FromRole="Rezepts" ToRole="Blud_and_nap" />
+    <NavigationProperty Name="Sost_rez" Relationship="Self.FK_Sost_rez_Rezepts" FromRole="Rezepts" ToRole="Sost_rez" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID_Role" />
+    </Key>
+    <Property Name="ID_Role" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Sost_rez">
+    <Key>
+      <PropertyRef Name="ID_Sost_rez" />
+    </Key>
+    <Property Name="ID_Sost_rez" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Rezept" Type="Int32" Nullable="false" />
+    <Property Name="ID_Ingred" Type="Int32" Nullable="false" />
+    <Property Name="Kol" Type="Int32" />
+    <Property Name="Ves" Type="Double" />
+    <NavigationProperty Name="Ingred" Relationship="Self.FK_Sost_rez_Ingred" FromRole="Sost_rez" ToRole="Ingred" />
+    <NavigationProperty Name="Rezepts" Relationship="Self.FK_Sost_rez_Rezepts" FromRole="Sost_rez" ToRole="Rezepts" />
+  </EntityType>
+  <EntityType Name="Sost_zakaz">
+    <Key>
+      <PropertyRef Name="ID_Sost_zakaz" />
+    </Key>
+    <Property Name="ID_Sost_zakaz" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Zakaz" Type="Int32" Nullable="false" />
+    <Property Name="ID_Blud_and_nap" Type="Int32" Nullable="false" />
+    <Property Name="Komment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Blud_and_nap" Relationship="Self.FK_Sost_zakaz_Blud_and_nap" FromRole="Sost_zakaz" ToRole="Blud_and_nap" />
+    <NavigationProperty Name="Zakaz" Relationship="Self.FK_Sost_zakaz_Zakaz" FromRole="Sost_zakaz" ToRole="Zakaz" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Type_ychet">
+    <Key>
+      <PropertyRef Name="ID_Type_ychet" />
+    </Key>
+    <Property Name="ID_Type_ychet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Jurn_ychet_ingred" Relationship="Self.FK_Jurn_ychet_ingred_Type_ychet" FromRole="Type_ychet" ToRole="Jurn_ychet_ingred" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID_User" />
+    </Key>
+    <Property Name="ID_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Role" Type="Int32" Nullable="false" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+    <NavigationProperty Name="Zakaz" Relationship="Self.FK_Zakaz_User" FromRole="User" ToRole="Zakaz" />
+  </EntityType>
+  <EntityType Name="Zakaz">
+    <Key>
+      <PropertyRef Name="ID_Zakaz" />
+    </Key>
+    <Property Name="ID_Zakaz" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_User" Type="Int32" Nullable="false" />
+    <Property Name="Sost_gotov" Type="Boolean" Nullable="false" />
+    <Property Name="Ob_stoim" Type="Int32" Nullable="false" />
+    <Property Name="Oplacheno" Type="Boolean" Nullable="false" />
+    <Property Name="Date_zakaz" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Sost_zakaz" Relationship="Self.FK_Sost_zakaz_Zakaz" FromRole="Zakaz" ToRole="Sost_zakaz" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Zakaz_User" FromRole="Zakaz" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Rashod">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="kol" Type="Int32" />
+    <Property Name="ves" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_Blud_and_nap_Categ1">
+    <End Role="Categ" Type="Self.Categ" Multiplicity="1" />
+    <End Role="Blud_and_nap" Type="Self.Blud_and_nap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categ">
+        <PropertyRef Name="ID_Categ" />
+      </Principal>
+      <Dependent Role="Blud_and_nap">
+        <PropertyRef Name="ID_Categ" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rezepts_Blud_and_nap">
+    <End Role="Blud_and_nap" Type="Self.Blud_and_nap" Multiplicity="1" />
+    <End Role="Rezepts" Type="Self.Rezepts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Blud_and_nap">
+        <PropertyRef Name="ID_Blud_and_nap" />
+      </Principal>
+      <Dependent Role="Rezepts">
+        <PropertyRef Name="ID_Blud_and_nap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sost_zakaz_Blud_and_nap">
+    <End Role="Blud_and_nap" Type="Self.Blud_and_nap" Multiplicity="1" />
+    <End Role="Sost_zakaz" Type="Self.Sost_zakaz" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Blud_and_nap">
+        <PropertyRef Name="ID_Blud_and_nap" />
+      </Principal>
+      <Dependent Role="Sost_zakaz">
+        <PropertyRef Name="ID_Blud_and_nap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ingred_Ed_izm">
+    <End Role="Ed_izm" Type="Self.Ed_izm" Multiplicity="1" />
+    <End Role="Ingred" Type="Self.Ingred" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ed_izm">
+        <PropertyRef Name="ID_Ed_izm" />
+      </Principal>
+      <Dependent Role="Ingred">
+        <PropertyRef Name="ID_Ed_izm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Jurn_ychet_ingred_Ingred">
+    <End Role="Ingred" Type="Self.Ingred" Multiplicity="1" />
+    <End Role="Jurn_ychet_ingred" Type="Self.Jurn_ychet_ingred" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ingred">
+        <PropertyRef Name="ID_Ingred" />
+      </Principal>
+      <Dependent Role="Jurn_ychet_ingred">
+        <PropertyRef Name="ID_Ingred" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sost_rez_Ingred">
+    <End Role="Ingred" Type="Self.Ingred" Multiplicity="1" />
+    <End Role="Sost_rez" Type="Self.Sost_rez" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ingred">
+        <PropertyRef Name="ID_Ingred" />
+      </Principal>
+      <Dependent Role="Sost_rez">
+        <PropertyRef Name="ID_Ingred" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Jurn_ychet_ingred_Type_ychet">
+    <End Role="Type_ychet" Type="Self.Type_ychet" Multiplicity="1" />
+    <End Role="Jurn_ychet_ingred" Type="Self.Jurn_ychet_ingred" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type_ychet">
+        <PropertyRef Name="ID_Type_ychet" />
+      </Principal>
+      <Dependent Role="Jurn_ychet_ingred">
+        <PropertyRef Name="ID_Type_ychet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sost_rez_Rezepts">
+    <End Role="Rezepts" Type="Self.Rezepts" Multiplicity="1" />
+    <End Role="Sost_rez" Type="Self.Sost_rez" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rezepts">
+        <PropertyRef Name="ID_Rezept" />
+      </Principal>
+      <Dependent Role="Sost_rez">
+        <PropertyRef Name="ID_Rezept" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID_Role" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="ID_Role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sost_zakaz_Zakaz">
+    <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="1" />
+    <End Role="Sost_zakaz" Type="Self.Sost_zakaz" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Zakaz">
+        <PropertyRef Name="ID_Zakaz" />
+      </Principal>
+      <Dependent Role="Sost_zakaz">
+        <PropertyRef Name="ID_Zakaz" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Zakaz_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID_User" />
+      </Principal>
+      <Dependent Role="Zakaz">
+        <PropertyRef Name="ID_User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MenuRestaurantEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Blud_and_nap" EntityType="Self.Blud_and_nap" />
+    <EntitySet Name="Categ" EntityType="Self.Categ" />
+    <EntitySet Name="Ed_izm" EntityType="Self.Ed_izm" />
+    <EntitySet Name="Ingred" EntityType="Self.Ingred" />
+    <EntitySet Name="Jurn_ychet_ingred" EntityType="Self.Jurn_ychet_ingred" />
+    <EntitySet Name="Rezepts" EntityType="Self.Rezepts" />
+    <EntitySet Name="Role" EntityType="Self.Role" />
+    <EntitySet Name="Sost_rez" EntityType="Self.Sost_rez" />
+    <EntitySet Name="Sost_zakaz" EntityType="Self.Sost_zakaz" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Type_ychet" EntityType="Self.Type_ychet" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="Zakaz" EntityType="Self.Zakaz" />
+    <EntitySet Name="Rashod" EntityType="Self.Rashod" />
+    <AssociationSet Name="FK_Blud_and_nap_Categ1" Association="Self.FK_Blud_and_nap_Categ1">
+      <End Role="Categ" EntitySet="Categ" />
+      <End Role="Blud_and_nap" EntitySet="Blud_and_nap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rezepts_Blud_and_nap" Association="Self.FK_Rezepts_Blud_and_nap">
+      <End Role="Blud_and_nap" EntitySet="Blud_and_nap" />
+      <End Role="Rezepts" EntitySet="Rezepts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sost_zakaz_Blud_and_nap" Association="Self.FK_Sost_zakaz_Blud_and_nap">
+      <End Role="Blud_and_nap" EntitySet="Blud_and_nap" />
+      <End Role="Sost_zakaz" EntitySet="Sost_zakaz" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ingred_Ed_izm" Association="Self.FK_Ingred_Ed_izm">
+      <End Role="Ed_izm" EntitySet="Ed_izm" />
+      <End Role="Ingred" EntitySet="Ingred" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Jurn_ychet_ingred_Ingred" Association="Self.FK_Jurn_ychet_ingred_Ingred">
+      <End Role="Ingred" EntitySet="Ingred" />
+      <End Role="Jurn_ychet_ingred" EntitySet="Jurn_ychet_ingred" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sost_rez_Ingred" Association="Self.FK_Sost_rez_Ingred">
+      <End Role="Ingred" EntitySet="Ingred" />
+      <End Role="Sost_rez" EntitySet="Sost_rez" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Jurn_ychet_ingred_Type_ychet" Association="Self.FK_Jurn_ychet_ingred_Type_ychet">
+      <End Role="Type_ychet" EntitySet="Type_ychet" />
+      <End Role="Jurn_ychet_ingred" EntitySet="Jurn_ychet_ingred" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sost_rez_Rezepts" Association="Self.FK_Sost_rez_Rezepts">
+      <End Role="Rezepts" EntitySet="Rezepts" />
+      <End Role="Sost_rez" EntitySet="Sost_rez" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sost_zakaz_Zakaz" Association="Self.FK_Sost_zakaz_Zakaz">
+      <End Role="Zakaz" EntitySet="Zakaz" />
+      <End Role="Sost_zakaz" EntitySet="Sost_zakaz" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Zakaz_User" Association="Self.FK_Zakaz_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Zakaz" EntitySet="Zakaz" />
+    </AssociationSet>
+    <FunctionImport Name="asdf" IsComposable="true" ReturnType="Collection(MenuRestaurantModel.asdf_Result)">
+      <Parameter Name="chislo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="addSostZakaz">
+      <Parameter Name="id_zak" Mode="In" Type="Int32" />
+      <Parameter Name="id_blud" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="addZakaz">
+      <Parameter Name="id_user" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="BlockAndUnblock2" ReturnType="Collection(MenuRestaurantModel.BlockAndUnblock2_Result)">
+      <Parameter Name="id_blud" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="blocke">
+      <Parameter Name="id_rez" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="BludKolKom" ReturnType="Collection(MenuRestaurantModel.BludKolKom_Result)">
+      <Parameter Name="id_user" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="bludoAndNap" ReturnType="Collection(MenuRestaurantModel.bludoAndNap_Result)">
+      <Parameter Name="chislo" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DelIdRez">
+      <Parameter Name="id_rez" Mode="In" Type="Int32" />
+      <Parameter Name="name" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="delSostZak">
+      <Parameter Name="id_zak" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ID_IngKol" ReturnType="Collection(MenuRestaurantModel.ID_IngKol_Result)">
+      <Parameter Name="id_zak" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ID_RezTop1" ReturnType="Collection(MenuRestaurantModel.ID_RezTop1_Result)">
+      <Parameter Name="id_rez" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="IngRez" ReturnType="Collection(MenuRestaurantModel.IngRez_Result)">
+      <Parameter Name="id_rez" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="kolCateg" ReturnType="Collection(MenuRestaurantModel.kolCateg_Result)">
+      <Parameter Name="chislo" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="kolCateg2" ReturnType="Collection(MenuRestaurantModel.kolCateg2_Result)">
+      <Parameter Name="cat" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="pol">
+      <Parameter Name="role" Mode="In" Type="Int32" />
+      <Parameter Name="login" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="pol2">
+      <Parameter Name="login" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="RezIng" ReturnType="Collection(MenuRestaurantModel.RezIng_Result)">
+      <Parameter Name="id_blud" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="RezOcn" ReturnType="Collection(MenuRestaurantModel.RezOcn_Result)">
+      <Parameter Name="id_blud" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sn" ReturnType="Collection(MenuRestaurantModel.sn_Result)">
+      <Parameter Name="chislo" Mode="In" Type="Int32" />
+      <Parameter Name="chto" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="spisanie">
+      <Parameter Name="pred" Mode="In" Type="Int32" />
+      <Parameter Name="nom" Mode="In" Type="Int32" />
+      <Parameter Name="date" Mode="InOut" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="ss" ReturnType="Collection(MenuRestaurantModel.ss_Result)" />
+    <FunctionImport Name="unblocke">
+      <Parameter Name="id_rez" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpIngJurn">
+      <Parameter Name="id_ing" Mode="In" Type="Int32" />
+      <Parameter Name="summaVesaJurn" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpIngZak">
+      <Parameter Name="id_ing" Mode="In" Type="Int32" />
+      <Parameter Name="summaVesaZak" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpKomSostZak">
+      <Parameter Name="kol" Mode="In" Type="Int32" />
+      <Parameter Name="komment" Mode="In" Type="String" />
+      <Parameter Name="id_user" Mode="In" Type="Int32" />
+      <Parameter Name="id_zak" Mode="In" Type="Int32" />
+      <Parameter Name="id_blud" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpZakData">
+      <Parameter Name="id_user" Mode="In" Type="Int32" />
+      <Parameter Name="id_zak" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpZakOplata">
+      <Parameter Name="id_user" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ZakObStoim">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="id_zak" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="BlockAndUnblock2_Result">
+    <Property Type="Int32" Name="ID_Rezept" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="kol" Nullable="true" />
+    <Property Type="Double" Name="ves" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="BludKolKom_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Column1" Nullable="true" />
+    <Property Type="String" Name="Komment" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="bludoAndNap_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Foto" Nullable="false" MaxLength="250" />
+    <Property Type="Int32" Name="Cena" Nullable="false" />
+    <Property Type="Int32" Name="ID_Blud_and_nap" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ID_IngKol_Result">
+    <Property Type="Int32" Name="ID_Ingred" Nullable="false" />
+    <Property Type="Double" Name="Column1" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ID_RezTop1_Result">
+    <Property Type="Int32" Name="ID_Rezept" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="IngRez_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Kol" Nullable="true" />
+    <Property Type="Double" Name="Ves" Nullable="true" />
+    <Property Type="String" Name="Name1" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="kolCateg_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Column1" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="kolCateg2_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Column1" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="RezIng_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Kol" Nullable="true" />
+    <Property Type="Double" Name="Ves" Nullable="true" />
+    <Property Type="String" Name="Name1" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="RezOcn_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ID_Categ" Nullable="false" />
+    <Property Type="Int32" Name="Cena" Nullable="false" />
+    <Property Type="String" Name="Foto" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="Spos_prig" Nullable="false" />
+    <Property Type="Int32" Name="ID_Blud_and_nap" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sn_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Column1" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ss_Result">
+    <Property Type="Int32" Name="ID_Categ" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+</Schema>

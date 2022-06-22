@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище MenuRestaurantModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6013: Первичный ключ в таблице или представлении "MenuRestaurant.dbo.Blud" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
+        <EntityType Name="Blud">
+          <Property Name="BludNumber" Type="int" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="PasOld" Type="varchar" MaxLength="50" />
+          <Property Name="PasNew" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+  <EntityType Name="Blud_and_nap">
+    <Key>
+      <PropertyRef Name="ID_Blud_and_nap" />
+    </Key>
+    <Property Name="ID_Blud_and_nap" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Categ" Type="int" Nullable="false" />
+    <Property Name="Foto" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cena" Type="int" Nullable="false" />
+    <Property Name="Block" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6013: Первичный ключ в таблице или представлении "MenuRestaurant.dbo.Blud2" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
+        <EntityType Name="Blud2">
+          <Property Name="Blud2Number" Type="int" />
+          <Property Name="ychetOld" Type="int" />
+          <Property Name="ychetNew" Type="int" />
+          <Property Name="DataOld" Type="datetime" />
+          <Property Name="DataNew" Type="datetime" />
+        </EntityType>-->
+  <EntityType Name="Categ">
+    <Key>
+      <PropertyRef Name="ID_Categ" />
+    </Key>
+    <Property Name="ID_Categ" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ed_izm">
+    <Key>
+      <PropertyRef Name="ID_Ed_izm" />
+    </Key>
+    <Property Name="ID_Ed_izm" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ingred">
+    <Key>
+      <PropertyRef Name="ID_Ingred" />
+    </Key>
+    <Property Name="ID_Ingred" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ves" Type="int" Nullable="false" />
+    <Property Name="ID_Ed_izm" Type="int" Nullable="false" />
+    <Property Name="Pred_sroc_hran" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Jurn_ychet_ingred">
+    <Key>
+      <PropertyRef Name="ID_Jurn_ingred" />
+    </Key>
+    <Property Name="ID_Jurn_ingred" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Ingred" Type="int" Nullable="false" />
+    <Property Name="ID_Type_ychet" Type="int" Nullable="false" />
+    <Property Name="Date_oper" Type="datetime" Nullable="false" />
+    <Property Name="Kol" Type="int" Nullable="false" />
+    <Property Name="Ves" Type="float" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "MenuRestaurant.dbo.Rashod" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="Rashod">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="kol" Type="int" />
+    <Property Name="ves" Type="int" />
+  </EntityType>
+  <EntityType Name="Rezepts">
+    <Key>
+      <PropertyRef Name="ID_Rezept" />
+    </Key>
+    <Property Name="ID_Rezept" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Blud_and_nap" Type="int" Nullable="false" />
+    <Property Name="Spos_prig" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID_Role" />
+    </Key>
+    <Property Name="ID_Role" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sost_rez">
+    <Key>
+      <PropertyRef Name="ID_Sost_rez" />
+    </Key>
+    <Property Name="ID_Sost_rez" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Rezept" Type="int" Nullable="false" />
+    <Property Name="ID_Ingred" Type="int" Nullable="false" />
+    <Property Name="Kol" Type="int" />
+    <Property Name="Ves" Type="float" />
+  </EntityType>
+  <EntityType Name="Sost_zakaz">
+    <Key>
+      <PropertyRef Name="ID_Sost_zakaz" />
+    </Key>
+    <Property Name="ID_Sost_zakaz" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Zakaz" Type="int" Nullable="false" />
+    <Property Name="ID_Blud_and_nap" Type="int" Nullable="false" />
+    <Property Name="Komment" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Type_ychet">
+    <Key>
+      <PropertyRef Name="ID_Type_ychet" />
+    </Key>
+    <Property Name="ID_Type_ychet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID_User" />
+    </Key>
+    <Property Name="ID_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Role" Type="int" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Zakaz">
+    <Key>
+      <PropertyRef Name="ID_Zakaz" />
+    </Key>
+    <Property Name="ID_Zakaz" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_User" Type="int" Nullable="false" />
+    <Property Name="Sost_gotov" Type="bit" Nullable="false" />
+    <Property Name="Ob_stoim" Type="int" Nullable="false" />
+    <Property Name="Oplacheno" Type="bit" Nullable="false" />
+    <Property Name="Date_zakaz" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_Blud_and_nap_Categ1">
+    <End Role="Categ" Type="Self.Categ" Multiplicity="1" />
+    <End Role="Blud_and_nap" Type="Self.Blud_and_nap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categ">
+        <PropertyRef Name="ID_Categ" />
+      </Principal>
+      <Dependent Role="Blud_and_nap">
+        <PropertyRef Name="ID_Categ" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ingred_Ed_izm">
+    <End Role="Ed_izm" Type="Self.Ed_izm" Multiplicity="1" />
+    <End Role="Ingred" Type="Self.Ingred" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ed_izm">
+        <PropertyRef Name="ID_Ed_izm" />
+      </Principal>
+      <Dependent Role="Ingred">
+        <PropertyRef Name="ID_Ed_izm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Jurn_ychet_ingred_Ingred">
+    <End Role="Ingred" Type="Self.Ingred" Multiplicity="1" />
+    <End Role="Jurn_ychet_ingred" Type="Self.Jurn_ychet_ingred" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ingred">
+        <PropertyRef Name="ID_Ingred" />
+      </Principal>
+      <Dependent Role="Jurn_ychet_ingred">
+        <PropertyRef Name="ID_Ingred" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Jurn_ychet_ingred_Type_ychet">
+    <End Role="Type_ychet" Type="Self.Type_ychet" Multiplicity="1" />
+    <End Role="Jurn_ychet_ingred" Type="Self.Jurn_ychet_ingred" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type_ychet">
+        <PropertyRef Name="ID_Type_ychet" />
+      </Principal>
+      <Dependent Role="Jurn_ychet_ingred">
+        <PropertyRef Name="ID_Type_ychet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rezepts_Blud_and_nap">
+    <End Role="Blud_and_nap" Type="Self.Blud_and_nap" Multiplicity="1" />
+    <End Role="Rezepts" Type="Self.Rezepts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Blud_and_nap">
+        <PropertyRef Name="ID_Blud_and_nap" />
+      </Principal>
+      <Dependent Role="Rezepts">
+        <PropertyRef Name="ID_Blud_and_nap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sost_rez_Ingred">
+    <End Role="Ingred" Type="Self.Ingred" Multiplicity="1" />
+    <End Role="Sost_rez" Type="Self.Sost_rez" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ingred">
+        <PropertyRef Name="ID_Ingred" />
+      </Principal>
+      <Dependent Role="Sost_rez">
+        <PropertyRef Name="ID_Ingred" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sost_rez_Rezepts">
+    <End Role="Rezepts" Type="Self.Rezepts" Multiplicity="1" />
+    <End Role="Sost_rez" Type="Self.Sost_rez" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rezepts">
+        <PropertyRef Name="ID_Rezept" />
+      </Principal>
+      <Dependent Role="Sost_rez">
+        <PropertyRef Name="ID_Rezept" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sost_zakaz_Blud_and_nap">
+    <End Role="Blud_and_nap" Type="Self.Blud_and_nap" Multiplicity="1" />
+    <End Role="Sost_zakaz" Type="Self.Sost_zakaz" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Blud_and_nap">
+        <PropertyRef Name="ID_Blud_and_nap" />
+      </Principal>
+      <Dependent Role="Sost_zakaz">
+        <PropertyRef Name="ID_Blud_and_nap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sost_zakaz_Zakaz">
+    <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="1" />
+    <End Role="Sost_zakaz" Type="Self.Sost_zakaz" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Zakaz">
+        <PropertyRef Name="ID_Zakaz" />
+      </Principal>
+      <Dependent Role="Sost_zakaz">
+        <PropertyRef Name="ID_Zakaz" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID_Role" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="ID_Role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Zakaz_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID_User" />
+      </Principal>
+      <Dependent Role="Zakaz">
+        <PropertyRef Name="ID_User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="asdf" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="chislo" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cena" Type="int" Nullable="false" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="blocke" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_rez" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="pol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="role" Type="int" Mode="In" />
+    <Parameter Name="login" Type="varchar" Mode="In" />
+    <Parameter Name="password" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="pol2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="login" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="qwer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="chislo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="chislo" Type="int" Mode="In" />
+    <Parameter Name="chto" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spisanie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pred" Type="int" Mode="In" />
+    <Parameter Name="nom" Type="int" Mode="In" />
+    <Parameter Name="date" Type="datetime" Mode="InOut" />
+  </Function>
+  <Function Name="ss" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="unblocke" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_rez" Type="int" Mode="InOut" />
+  </Function>
+  <EntityContainer Name="Хранилище MenuRestaurantModelContainer">
+    <EntitySet Name="Blud_and_nap" EntityType="Self.Blud_and_nap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categ" EntityType="Self.Categ" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ed_izm" EntityType="Self.Ed_izm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ingred" EntityType="Self.Ingred" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Jurn_ychet_ingred" EntityType="Self.Jurn_ychet_ingred" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rezepts" EntityType="Self.Rezepts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sost_rez" EntityType="Self.Sost_rez" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sost_zakaz" EntityType="Self.Sost_zakaz" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Type_ychet" EntityType="Self.Type_ychet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Zakaz" EntityType="Self.Zakaz" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rashod" EntityType="Self.Rashod" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Rashod].[Name] AS [Name], 
+    [Rashod].[kol] AS [kol], 
+    [Rashod].[ves] AS [ves]
+    FROM [dbo].[Rashod] AS [Rashod]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Blud_and_nap_Categ1" Association="Self.FK_Blud_and_nap_Categ1">
+      <End Role="Categ" EntitySet="Categ" />
+      <End Role="Blud_and_nap" EntitySet="Blud_and_nap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ingred_Ed_izm" Association="Self.FK_Ingred_Ed_izm">
+      <End Role="Ed_izm" EntitySet="Ed_izm" />
+      <End Role="Ingred" EntitySet="Ingred" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Jurn_ychet_ingred_Ingred" Association="Self.FK_Jurn_ychet_ingred_Ingred">
+      <End Role="Ingred" EntitySet="Ingred" />
+      <End Role="Jurn_ychet_ingred" EntitySet="Jurn_ychet_ingred" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Jurn_ychet_ingred_Type_ychet" Association="Self.FK_Jurn_ychet_ingred_Type_ychet">
+      <End Role="Type_ychet" EntitySet="Type_ychet" />
+      <End Role="Jurn_ychet_ingred" EntitySet="Jurn_ychet_ingred" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rezepts_Blud_and_nap" Association="Self.FK_Rezepts_Blud_and_nap">
+      <End Role="Blud_and_nap" EntitySet="Blud_and_nap" />
+      <End Role="Rezepts" EntitySet="Rezepts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sost_rez_Ingred" Association="Self.FK_Sost_rez_Ingred">
+      <End Role="Ingred" EntitySet="Ingred" />
+      <End Role="Sost_rez" EntitySet="Sost_rez" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sost_rez_Rezepts" Association="Self.FK_Sost_rez_Rezepts">
+      <End Role="Rezepts" EntitySet="Rezepts" />
+      <End Role="Sost_rez" EntitySet="Sost_rez" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sost_zakaz_Blud_and_nap" Association="Self.FK_Sost_zakaz_Blud_and_nap">
+      <End Role="Blud_and_nap" EntitySet="Blud_and_nap" />
+      <End Role="Sost_zakaz" EntitySet="Sost_zakaz" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sost_zakaz_Zakaz" Association="Self.FK_Sost_zakaz_Zakaz">
+      <End Role="Zakaz" EntitySet="Zakaz" />
+      <End Role="Sost_zakaz" EntitySet="Sost_zakaz" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Zakaz_User" Association="Self.FK_Zakaz_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Zakaz" EntitySet="Zakaz" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

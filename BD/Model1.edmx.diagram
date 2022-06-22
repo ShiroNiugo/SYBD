@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cefdaade75e243ffbbb7f83b8b9182e8" Name="Diagram1">
+        <EntityTypeShape EntityType="MenuRestaurantModel.Blud_and_nap" Width="1.5" PointX="3.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MenuRestaurantModel.Categ" Width="1.5" PointX="1.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MenuRestaurantModel.Ed_izm" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MenuRestaurantModel.Ingred" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MenuRestaurantModel.Jurn_ychet_ingred" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MenuRestaurantModel.Rezepts" Width="1.5" PointX="6" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MenuRestaurantModel.Role" Width="1.5" PointX="8.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="MenuRestaurantModel.Sost_rez" Width="1.5" PointX="8.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MenuRestaurantModel.Sost_zakaz" Width="1.5" PointX="15.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MenuRestaurantModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MenuRestaurantModel.Type_ychet" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MenuRestaurantModel.User" Width="1.5" PointX="11" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MenuRestaurantModel.Zakaz" Width="1.5" PointX="13.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MenuRestaurantModel.Rashod" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <AssociationConnector Association="MenuRestaurantModel.FK_Blud_and_nap_Categ1" ManuallyRouted="false" />
+        <AssociationConnector Association="MenuRestaurantModel.FK_Rezepts_Blud_and_nap" ManuallyRouted="false" />
+        <AssociationConnector Association="MenuRestaurantModel.FK_Sost_zakaz_Blud_and_nap" ManuallyRouted="false" />
+        <AssociationConnector Association="MenuRestaurantModel.FK_Ingred_Ed_izm" ManuallyRouted="false" />
+        <AssociationConnector Association="MenuRestaurantModel.FK_Jurn_ychet_ingred_Ingred" ManuallyRouted="false" />
+        <AssociationConnector Association="MenuRestaurantModel.FK_Sost_rez_Ingred" ManuallyRouted="false" />
+        <AssociationConnector Association="MenuRestaurantModel.FK_Jurn_ychet_ingred_Type_ychet" ManuallyRouted="false" />
+        <AssociationConnector Association="MenuRestaurantModel.FK_Sost_rez_Rezepts" ManuallyRouted="false" />
+        <AssociationConnector Association="MenuRestaurantModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="MenuRestaurantModel.FK_Sost_zakaz_Zakaz" ManuallyRouted="false" />
+        <AssociationConnector Association="MenuRestaurantModel.FK_Zakaz_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
